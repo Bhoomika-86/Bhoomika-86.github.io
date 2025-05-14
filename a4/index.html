@@ -1,62 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Create a new account</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Facebook Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #1877f2;
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .signup-box {
+      background-color: white;
+      padding: 25px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 360px;
+    }
+
+    .signup-box h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    input, .custom-select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      border: 1px solid #ccd0d5;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .gender {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+    }
+
+    .gender label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccd0d5;
+      border-radius: 6px;
+      background-color: #f5f6f7;
+      cursor: pointer;
+      margin: 0 4px;
+    }
+
+    .signup-btn {
+      width: 100%;
+      background-color: #42b72a;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .login-link a {
+      color: #1877f2;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .dob-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .custom-select {
+      position: relative;
+      width: 30%;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
   <h1>facebook</h1>
-  <h2>Create a new account</h2>
-  <p>It's quick and easy..</p>
-  <form>
-    <table>
-      <tr>
-        <td><input type="text" placeholder="First name" required></td>
-        <td><input type="text" placeholder="Surname" required></td>
-      </tr>
-    </table>
+  <div class="signup-box">
+    <h2>Create a new account</h2>
+    <p>It's quick and easy.</p>
+    <form id="signupForm">
+      <input type="text" placeholder="First name" id="fname" required />
+      <input type="text" placeholder="Surname" id="lname" required />
 
-    <p>Date of birth</p>
-    <select name="day">
-      <!-- Days 1–31 -->
-      <?php for ($d = 1; $d <= 31; $d++) echo "<option>$d</option>"; ?>
-    </select>
+      <label>Date of birth</label>
+      <div class="dob-container">
+        <div class="custom-select">
+          <select id="day"></select>
+        </div>
+        <div class="custom-select">
+          <select id="month"></select>
+        </div>
+        <div class="custom-select">
+          <select id="year"></select>
+        </div>
+      </div>
 
-    <select name="month">
-      <!-- Months January–December -->
-      <option>January</option>
-      <option>February</option>
-      <option>March</option>
-      <option>April</option>
-      <option>May</option>
-      <option>June</option>
-      <option>July</option>
-      <option>August</option>
-      <option>September</option>
-      <option>October</option>
-      <option>November</option>
-      <option>December</option>
-    </select>
+      <label>Gender</label>
+      <div class="gender">
+        <label><input type="radio" name="gender" value="Female" /> Female</label>
+        <label><input type="radio" name="gender" value="Male" /> Male</label>
+        <label><input type="radio" name="gender" value="Custom" /> Custom</label>
+      </div>
 
-    <select name="year">
-      <!-- Years 1905–2025 -->
-      <?php for ($y = 2025; $y >= 1905; $y--) echo "<option>$y</option>"; ?>
-    </select>
+      <input type="email" placeholder="Mobile number or email address" id="email" required />
+      <input type="password" placeholder="New password" id="password" required />
 
-    <p>Gender</p>
-    <input type="radio" name="gender" value="female" id="female">
-    <label for="female">Female</label>
-    <input type="radio" name="gender" value="male" id="male">
-    <label for="male">Male</label>
-    <input type="radio" name="gender" value="custom" id="custom">
-    <label for="custom">Custom</label>
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
 
-    <br><br>
-    <input type="text" placeholder="Mobile number or email address" required><br><br>
-    <input type="password" placeholder="New password" required><br><br>
+    <div class="login-link">
+      <a href="#">Already have an account?</a>
+    </div>
+  </div>
 
-    <button type="submit">Sign Up</button>
-  </form>
+  <script>
+    // Populate Day Dropdown
+    const daySelect = document.getElementById("day");
+    for (let i = 1; i <= 31; i++) {
+      let opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = i;
+      daySelect.appendChild(opt);
+    }
 
-  <p><a href="#">Already have an account?</a></p>
+    // Populate Month Dropdown
+    const monthSelect = document.getElementById("month");
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    months.forEach((month, i) => {
+      let opt = document.createElement("option");
+      opt.value = i + 1;
+      opt.textContent = month;
+      monthSelect.appendChild(opt);
+    });
+
+    // Populate Year Dropdown
+    const yearSelect = document.getElementById("year");
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= 1900; y--) {
+      let opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      yearSelect.appendChild(opt);
+    }
+
+    // Handle form submission
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Form submitted successfully!");
+      // You can collect form data and send to backend here
+    });
+  </script>
 </body>
 </html>
