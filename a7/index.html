@@ -7,24 +7,23 @@
 
   <div style="text-align: center; margin-top: 100px;">
 
-    <h2>Calculator</h2>
+    <h2>Basic Calculator</h2>
 
     <p>First Number: <input type="text" id="num1"></p>
-
     <p>Second Number: <input type="text" id="num2"></p>
 
-    <button onclick="calculate()">Calculate</button>
+    <button onclick="calculate('+')">+</button>
+    <button onclick="calculate('-')">−</button>
+    <button onclick="calculate('*')">×</button>
+    <button onclick="calculate('/')">÷</button>
 
-    <h3>Results:</h3>
-    <p id="add"></p>
-    <p id="sub"></p>
-    <p id="mul"></p>
-    <p id="div"></p>
+    <h3>Result:</h3>
+    <p id="result"></p>
 
   </div>
 
   <script>
-    function calculate() {
+    function calculate(operator) {
       var num1 = document.getElementById("num1").value;
       var num2 = document.getElementById("num2").value;
 
@@ -32,22 +31,35 @@
       var b = parseFloat(num2);
 
       if (isNaN(a) || isNaN(b)) {
-        document.getElementById("add").innerText = "Please enter valid numbers.";
-        document.getElementById("sub").innerText = "";
-        document.getElementById("mul").innerText = "";
-        document.getElementById("div").innerText = "";
+        document.getElementById("result").innerText = "Please enter valid numbers.";
         return;
       }
 
-      document.getElementById("add").innerText = "Add: " + (a + b);
-      document.getElementById("sub").innerText = "Subtract: " + (a - b);
-      document.getElementById("mul").innerText = "Multiply: " + (a * b);
+      let result;
 
-      if (b === 0) {
-        document.getElementById("div").innerText = "Divide: Cannot divide by zero";
-      } else {
-        document.getElementById("div").innerText = "Divide: " + (a / b);
+      switch(operator) {
+        case '+':
+          result = a + b;
+          break;
+        case '-':
+          result = a - b;
+          break;
+        case '*':
+          result = a * b;
+          break;
+        case '/':
+          if (b === 0) {
+            document.getElementById("result").innerText = "÷: Cannot divide by zero";
+            return;
+          }
+          result = a / b;
+          break;
+        default:
+          document.getElementById("result").innerText = "Invalid operation.";
+          return;
       }
+
+      document.getElementById("result").innerText = operator + ": " + result;
     }
   </script>
 
