@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+</head>
+<body>
+
+  <div style="text-align: center; margin-top: 100px;">
+
+    <h2>Calculator</h2>
+
+    <p>First Number: <input type="text" id="num1"></p>
+
+    <p>Second Number: <input type="text" id="num2"></p>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h3>Results:</h3>
+    <p id="add"></p>
+    <p id="sub"></p>
+    <p id="mul"></p>
+    <p id="div"></p>
+
+  </div>
+
+  <script>
+    function calculate() {
+      var num1 = document.getElementById("num1").value;
+      var num2 = document.getElementById("num2").value;
+
+      var a = parseFloat(num1);
+      var b = parseFloat(num2);
+
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById("add").innerText = "Please enter valid numbers.";
+        document.getElementById("sub").innerText = "";
+        document.getElementById("mul").innerText = "";
+        document.getElementById("div").innerText = "";
+        return;
+      }
+
+      document.getElementById("add").innerText = "Add: " + (a + b);
+      document.getElementById("sub").innerText = "Subtract: " + (a - b);
+      document.getElementById("mul").innerText = "Multiply: " + (a * b);
+
+      if (b === 0) {
+        document.getElementById("div").innerText = "Divide: Cannot divide by zero";
+      } else {
+        document.getElementById("div").innerText = "Divide: " + (a / b);
+      }
+    }
+  </script>
+
+</body>
+</html>

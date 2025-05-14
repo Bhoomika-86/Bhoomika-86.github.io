@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .login-container {
+      max-width: 300px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 8px;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h3>Login</h3>
+    <input type="email" id="email" placeholder="Enter your email">
+    <div id="emailError" class="error"></div>
+
+    <input type="password" id="password" placeholder="Enter your password">
+    <div id="passError" class="error"></div>
+
+    <button onclick="handleLogin()">Submit</button>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      document.getElementById('emailError').innerText = '';
+      document.getElementById('passError').innerText = '';
+
+      if (!email) {
+        document.getElementById('emailError').innerText = 'Email required';
+      }
+      if (!password) {
+        document.getElementById('passError').innerText = 'Password required';
+      }
+
+      if (email && password) {
+        alert('Logged in successfully ');
+      }
+    }
+  </script>
+
+</body>
+</html>
